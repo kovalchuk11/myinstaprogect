@@ -6,10 +6,65 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="..\static\favicon.ico" type="image/x-icon" />
     <title>Статистика аккаунтов</title>
+    <style>
+    #page-preloader{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right:0;
+    bottom:0;
+    background: #9A12B3;
+    z-index: 30;}
+
+    .contpre small{font-size:25px;}
+
+    .contpre{
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    left: 50%;top: 48%;
+    margin-left:-125px;
+    margin-top:-75px;
+    color:#fff;
+    font-size:40px;
+    letter-spacing:-2px;
+    text-align:center;
+    line-height:35px;}
+
+    #page-preloader .spinner {
+    position: absolute;
+    width: 41px;
+    height: 41px;
+    background: url(images/oval.svg) center center no-repeat;
+    background-size:41px;
+    margin: -16px 0 0 -16px;}
+
+
+    </style>
 </head>
 <body>
-
+<div class="p_prldr">
+<div class="cssload-body">
+		<span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+		</span>
+    <div class="cssload-base">
+        <span></span>
+        <div class="cssload-face"></div>
+    </div>
+</div>
+<div class="cssload-longfazers">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+</div>
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -50,5 +105,23 @@
         </div>
     </div>
 </div>
+<input id="startPrel" type="submit" value="Далее"/>
+
+<div class="hide" id="page-preloader"><div class="contpre"><span class="spinner"></span><br/>Спасибо текст<br/><small>Закрыть</small></div></div>
+
+<div class="text hide"> <p>text</p> </div>
 </body>
+<script type="text/javascript">
+    var btn = document.getElementById('startPrel');
+    var preloader = document.getElementById('page-preloader');
+//    var text = document.querySelector('.text');
+
+    btn.addEventListener('click', function() {
+        preloader.classList.remove("hide");
+//        setTimeout(function() {
+//            preloader.classList.add("hide");
+//            text.classList.remove("hide")
+//        }, 1500);
+    });
+</script>
 </html>

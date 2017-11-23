@@ -4,6 +4,10 @@ public class TwoAcc {
 private String first;
 private String second;
 
+    public TwoAcc(String first) {
+        this.first = first;
+    }
+
     public TwoAcc(String first, String second) {
         this.first = first;
         this.second = second;

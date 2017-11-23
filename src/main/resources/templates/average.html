@@ -4,12 +4,102 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/style/bootstrap-datetimepicker.min.css}"/>
+    <script th:src="@{/style/jquery-3.2.1.js}"></script>
+    <script th:src="@{/style/moment-with-locales.min.js}"></script>
+    <script th:src="@{/style/bootstrap.js}"></script>
+    <script th:src="@{/style/bootstrap-datetimepicker.min.js}"></script>
+
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon"/>
     <title>Сравнить профили</title>
+    <style type="text/css">
+        .p_prldr{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right:0;
+            bottom:0;
+            z-index: 300;}
+
+        .cssload-loader {
+            display: block;
+            margin:0 auto;
+            width: 61px;
+            height: 61px;
+            position: relative;
+            border: 6px solid rgb(0,0,0);
+            animation: cssload-loader 2.3s infinite ease;
+            -o-animation: cssload-loader 2.3s infinite ease;
+            -ms-animation: cssload-loader 2.3s infinite ease;
+            -webkit-animation: cssload-loader 2.3s infinite ease;
+            -moz-animation: cssload-loader 2.3s infinite ease;
+        }
+
+        .cssload-loader-inner {
+            vertical-align: top;
+            display: inline-block;
+            width: 100%;
+            background-color: rgb(0,0,0);
+            animation: cssload-loader-inner 2.3s infinite ease-in;
+            -o-animation: cssload-loader-inner 2.3s infinite ease-in;
+            -ms-animation: cssload-loader-inner 2.3s infinite ease-in;
+            -webkit-animation: cssload-loader-inner 2.3s infinite ease-in;
+            -moz-animation: cssload-loader-inner 2.3s infinite ease-in;
+        }
+        .hide
+        {
+            display: none;
+        }
+        @keyframes cssload-loader {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(180deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            75% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes cssload-loader-inner {
+            0% {
+                height: 0%;
+            }
+
+            25% {
+                height: 0%;
+            }
+
+            50% {
+                height: 100%;
+            }
+
+            75% {
+                height: 100%;
+            }
+
+            100% {
+                height: 0%;
+            }
+        }
+    </style>
 </head>
 <body>
-
+<div class="p_prldr hide" id="page-preloader"><span class="cssload-loader"><span class="cssload-loader-inner"></span></span></div>
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -33,17 +123,62 @@
         </div>
     </div>
 </nav>
-<br/>
 <div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-4 text-left">
+            <div>
+                <div class="well well-sm">
+                        <p align="center" >
+                            Выберите промежуток времени для показа средних показателей по аккаунту
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row content col-sm-4">
+        <form action="#" th:action="@{/average/submit}" th:object="${averagedata}" method="post">
+            <div class="form-group">
+                <div class="form-group">
+                    <input required="required" placeholder="НИК АККАУНТА" class="form-control" th:field="*{url}"/>
+                </div>
+                <div class='input-group date' id='datetimepicker6'>
+                    <input required="required" class="form-control" th:field="*{po}"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </span>
+                    <span class="input-group-addon datepickerbutton">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker7'>
+                    <input required="required" class="form-control" th:field="*{ot}"/>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </span>
+                    <span class="input-group-addon datepickerbutton">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+            </div>
+            <button id="startPrel" type="submit" class="btn btn-success btn-lg">Старт</button>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid text-center" th:if="${massage}">
     <div class="row content">
         <div class="col-sm-4 text-left">
             <div>
                 <div class="well">
                     <div class="panel-body">
-                        <h1>В разработке</h1>
-                        <p>
-                            Этот сайт является демо версией возможностей сбора информации инстаграм аккаунтов
-                        </p>
+                        <div >
+                            <h3 th:text="${massage}"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,4 +186,31 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker({locale: 'ru', format: 'DD.MM.YYYY'});
+        $('#datetimepicker7').datetimepicker({
+            locale: 'ru', format: 'DD.MM.YYYY',
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+        $('.glyphicon-remove').click(function () {
+            $('#datetimepicker6').data("DateTimePicker").clear();
+            $('#datetimepicker7').data("DateTimePicker").clear();
+        });
+    });
+
+    var btn = document.getElementById('startPrel');
+    var preloader = document.getElementById('page-preloader');
+    var text = document.querySelector('.text');
+
+    btn.addEventListener('click', function() {
+        preloader.classList.remove("hide");
+    });
+</script>
 </html>

@@ -4,10 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * Created by vasily on 27.04.17.
- * Login and password which stores in external file. Create a file in PATH which contains login and password
- */
 public class Credentials {
 
     private final static String PATH = "src\\main\\resources\\credentials.properties";
