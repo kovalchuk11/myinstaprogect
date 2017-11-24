@@ -1,5 +1,7 @@
 package myprogect.insta.controller;
 
+import myprogect.insta.entity.Infoacc;
+import myprogect.insta.service.InfoAccService;
 import myprogect.insta.service.Main;
 import myprogect.insta.model.Averagedata;
 import myprogect.insta.model.TwoAcc;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/")
@@ -22,6 +26,8 @@ public class MyController {
 
     @Autowired
     private Main main;
+    @Autowired
+    InfoAccService infoAccService;
     @RequestMapping
     public String showIndex(){
         return "index";
@@ -53,30 +59,29 @@ public class MyController {
 
     @RequestMapping (value = "/followers/submit", method = RequestMethod.POST)
     public ResponseEntity<byte[]> getDownloadData(@ModelAttribute TwoAcc acc) throws Exception {
-        String[] username1 = acc.getFirst().split("/");
-        String ol = username1[username1.length - 1];
-        String massage = null;
-        try {
-            main.start();
-            massage = main.getFollowers(acc.getFirst());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            String[] username1 = acc.getFirst().split("/");
+            String ol = username1[username1.length - 1];
+            String massage = null;
+            try {
+                main.start();
+                massage = main.getFollowers(acc.getFirst());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 //        String regData = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-        byte[] output = massage.getBytes();
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("charset", "utf-8");
-        responseHeaders.setContentType(MediaType.valueOf("text/html"));
-        responseHeaders.setContentLength(output.length);
-        responseHeaders.set("Content-disposition", "attachment; filename="+ol+".txt");
-
-        return new ResponseEntity<byte[]>(output, responseHeaders, HttpStatus.OK);
+            byte[] output = massage.getBytes();
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("charset", "utf-8");
+            responseHeaders.setContentType(MediaType.valueOf("text/html"));
+            responseHeaders.setContentLength(output.length);
+            responseHeaders.set("Content-disposition", "attachment; filename=" + ol + ".txt");
+            return new ResponseEntity<byte[]>(output, responseHeaders, HttpStatus.OK);
     }
 
 
     @RequestMapping (value = "/statistic")
-    public String showStatistic(){
+    public String showStatistic(Model model){
+        model.addAttribute("infoAccs", infoAccService.getAll());
         return "statistic";
     }
 
@@ -88,11 +93,13 @@ public class MyController {
 
     @RequestMapping(value = "/average/submit", method = RequestMethod.POST)
     public String average(@ModelAttribute Averagedata averagedata, Model model){
+        if(!(averagedata.getOt().equals("")&averagedata.getPo().equals(""))){
+            System.out.println("true");
         System.out.println(averagedata);
         String massage = null;
         massage = main.getAvarage(averagedata);
         model.addAttribute("massage", massage);
-
+        }
 //        if((averagedata.getOt().equals("")&averagedata.getPo().equals(""))||(!averagedata.getOt().equals("")&!averagedata.getPo().equals(""))){
 //            System.out.println("true");
 //        }
@@ -101,6 +108,10 @@ public class MyController {
 //        if(averagedata.getOt().equals(""))
 //            System.out.println("pusto");
 //        System.out.println(averagedata.getUrl()+"\r\n"+averagedata.getOt()+"\r\n"+ averagedata.getPo());
+        else{
+            model.addAttribute("massage", "Заполните поля");
+            return "average";
+        }
         return "average";
     }
 

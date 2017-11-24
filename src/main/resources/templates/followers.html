@@ -50,10 +50,10 @@
                 <h1 align="center"> Сохранить подписчиков</h1>
                 <div class="form-group">
 
-                    <input required="required" type="text" class="form-control" th:field="*{first}"/>
+                    <input id='fio' onkeyup='checkParams()' type="text" autocomplete="off" class="form-control" th:field="*{first}"/>
                 </div>
-
-                <button id="startPrel" type="submit" class="btn btn-success btn-lg">Старт</button>
+                <!--<input type='button' id='submit' value='ОТПРАВИТЬ' disabled="disabled" />-->
+                <button id='startPrel' type="submit" class="btn btn-success btn-lg" disabled="disabled">Старт</button>
             </form>
             <hr/>
         </div>
@@ -83,6 +83,15 @@
     btn.addEventListener('click', function() {
         text.classList.remove("hide");
     });
+    function checkParams() {
+        var fio = $('#fio').val();
+
+        if(fio.length != 0) {
+            $('#startPrel').removeAttr('disabled');
+        } else {
+            $('#startPrel').attr('disabled', 'disabled');
+        }
+    }
 
 </script>
 </html>

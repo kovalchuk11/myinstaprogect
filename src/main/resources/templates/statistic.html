@@ -89,25 +89,34 @@
     </div>
 </nav>
 <br/>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-4 text-left">
-            <div>
-                <div class="well">
-                    <div class="panel-body">
-                        <h1>В разработке</h1>
-                        <p>
-                            Этот сайт является демо версией возможностей сбора информации инстаграм аккаунтов
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="col-sm-6" >
+    <table class="table">
+        <thead class="thead-inverse">
+        <tr>
+            <th></th>
+            <th>Аккаунт</th>
+            <th>Подписчиков</th>
+            <th>Лайков в ср.</th>
+            <th>Комментов в ср.</th>
+            <th>Просмотров в ср.</th>
+        </tr>
+        </thead>
+        <tr th:each="infoAcc : ${infoAccs}">
+            <td><img th:width="40" th:height="40" th:src="${infoAcc.getImg()}"/></td>
+            <td th:utext="${infoAcc.getFullname()}"/>
+            <td th:utext="${infoAcc.getFollowers()}"/>
+            <td th:utext="${infoAcc.getLike()}"/>
+            <td th:utext="${infoAcc.getComment()}"/>
+            <td th:utext="${infoAcc.getView()}"/>
+        </tr>
+    </table>
 </div>
-<input id="startPrel" type="submit" value="Далее"/>
 
-<div class="hide" id="page-preloader"><div class="contpre"><span class="spinner"></span><br/>Спасибо текст<br/><small>Закрыть</small></div></div>
+<div >
+
+    <hr/>
+</div>
+<!--<div class="hide" id="page-preloader"><div class="contpre"><span class="spinner"></span><br/>Спасибо текст<br/><small>Закрыть</small></div></div>-->
 
 <div class="text hide"> <p>text</p> </div>
 </body>
