@@ -1,20 +1,31 @@
 package myprogect.insta.service;
 
-import myprogect.insta.dao.InfoAccDao;
+import myprogect.insta.repositories.InfoAccRepository;
 import myprogect.insta.entity.Infoacc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
-public class InfoAccService {
+public class InfoAccService  {
     @Autowired
-    private InfoAccDao infoAccDao;
+    InfoAccRepository infoAccRepository;
+
 
     public List<Infoacc> getAll() {
-        List<Infoacc> allAcc = (List<Infoacc>) infoAccDao.findAll();
+        List<Infoacc> allAcc = new ArrayList<>();
+        allAcc.addAll((List<Infoacc>) infoAccRepository.findAll());
+        for (Infoacc acc: allAcc)
+            System.out.println(acc.getUsername());
         return allAcc;
     }
-
+    public void update(Infoacc infoacc){
+        System.out.println(infoacc);
+        infoAccRepository.save(infoacc);
+    }
+    public void save(Infoacc infoacc) {
+        infoAccRepository.save(infoacc);
+    }
 }

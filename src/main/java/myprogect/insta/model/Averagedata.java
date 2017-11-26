@@ -5,6 +5,15 @@ public class Averagedata {
     String ot;
     String po;
 
+    public Averagedata() {
+    }
+
+    public Averagedata(String url, String ot, String po) {
+        this.url = url;
+        this.ot = ot;
+        this.po = po;
+    }
+
     public String getUrl() {
         return url;
     }

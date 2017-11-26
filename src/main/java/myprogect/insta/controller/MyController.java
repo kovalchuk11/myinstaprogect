@@ -5,6 +5,7 @@ import myprogect.insta.service.InfoAccService;
 import myprogect.insta.service.Main;
 import myprogect.insta.model.Averagedata;
 import myprogect.insta.model.TwoAcc;
+import myprogect.insta.service.UpdateDB;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class MyController {
-
+    @Autowired
+    UpdateDB updateDB;
     @Autowired
     private Main main;
     @Autowired
@@ -83,6 +85,11 @@ public class MyController {
     public String showStatistic(Model model){
         model.addAttribute("infoAccs", infoAccService.getAll());
         return "statistic";
+    }
+    @RequestMapping (value = "/statistic/update")
+    public String showStatistic(){
+        updateDB.updateDb();
+        return "redirect:../";
     }
 
     @RequestMapping(value = "/average")

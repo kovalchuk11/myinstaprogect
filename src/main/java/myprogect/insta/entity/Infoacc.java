@@ -1,20 +1,41 @@
 package myprogect.insta.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
-public class Infoacc {
+@Table(name = "infoacc")
+public class Infoacc implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @NotNull
+    @Column(name = "accids")
     private long accid;
+    @NotNull
+    @Column(name = "fullnames")
     private String fullname;
+    @NotNull
+    @Column(name = "usernames")
     private String username;
+    @NotNull
+    @Column(name = "followerss")
     private long followers;
+    @NotNull
+    @Column(name = "likes")
     private long like;
+    @NotNull
+    @Column(name = "comments")
     private long comment;
+    @NotNull
+    @Column(name = "views")
     private long view;
+    @NotNull
+    @Column(name = "imgs")
     private String img;
+
+
 
     public Infoacc() {
     }
@@ -99,6 +120,19 @@ public class Infoacc {
         this.img = img;
     }
 
-
+    @Override
+    public String toString() {
+        return "Infoacc{" +
+                "id=" + id +
+                ", accid=" + accid +
+                ", fullname='" + fullname + '\'' +
+                ", username='" + username + '\'' +
+                ", followers=" + followers +
+                ", like=" + like +
+                ", comment=" + comment +
+                ", view=" + view +
+                ", img='" + img + '\'' +
+                '}';
+    }
 
 }

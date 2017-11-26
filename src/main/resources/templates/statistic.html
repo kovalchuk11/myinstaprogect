@@ -7,6 +7,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <link rel="shortcut icon" href="..\static\favicon.ico" type="image/x-icon" />
     <title>Статистика аккаунтов</title>
     <style>
@@ -55,7 +58,7 @@
                 <li class="active"><a href="/statistic">Статистика аккаунтов</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/blog/login"><span class="glyphicon glyphicon-log-in"></span> Залогироваться</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Вход</a></li>
             </ul>
         </div>
     </div>
@@ -86,11 +89,8 @@
 </div>
 
 
-
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
 <script>
     $(function(){
         $("#example").dataTable({
@@ -126,7 +126,6 @@
                 }
             }
         })
-
     });
 </script>
 </html>
