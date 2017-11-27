@@ -11,7 +11,7 @@
     <script th:src="@{/style/bootstrap-datetimepicker.min.js}"></script>
 
     <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon"/>
-    <title>Сравнить профили</title>
+    <title>Средние данные</title>
     <style type="text/css">
         .navbar {
             margin-bottom: 0;
@@ -117,7 +117,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/average">Средние данные</a></li>
-                <li><a href="/equalsAcc">Сравнить профили</a></li>
+                <li><a href="/equalsAcc">Сравнить подписчиков</a></li>
                 <li><a href="/followers">Скачать подписчиков</a></li>
                 <li><a href="/statistic">Рейтинг аккаунтов</a></li>
             </ul>
@@ -146,7 +146,7 @@
         <form action="#" th:action="@{/average/submit}" th:object="${averagedata}" method="post">
             <div class="form-group">
                 <div class="form-group">
-                    <input placeholder="НИК АККАУНТА" class="form-control" th:field="*{url}"/>
+                    <input placeholder="username аккаунта" class="form-control" th:field="*{url}"/>
                 </div>
                 <div class='input-group date' id='datetimepicker6'>
                     <input  class="form-control" th:field="*{po}"/>
@@ -184,6 +184,22 @@
                         <div >
                             <h3 th:text="${massage}"/>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-8 text-left">
+            <div>
+                <div class="well">
+                    <div class="panel-body">
+                        <p>
+                            Этот сайт является демо версией возможностей сбора информации инстаграм аккаунтов
+                        </p>
                     </div>
                 </div>
             </div>
