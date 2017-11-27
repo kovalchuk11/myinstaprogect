@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class Main {
+public class Maina {
 
     private static AuthenticatedInsta client;
     private static int c = 17;

@@ -34,6 +34,7 @@ public class Anonymus {
     String usernames = "";
     long followers = 0;
     String img = "";
+    String urls = "";
 
 
     static OkHttpClient client = new OkHttpClient();
@@ -249,6 +250,7 @@ public Infoacc selectionPosts(Averagedata averagedata, Infoacc acc) {
             img = userinfo.getUser().getProfilePicUrl();
             id = Long.parseLong(userinfo.getUser().getId());
             usernames = userinfo.getUser().getUsername();
+            urls = "https://www.instagram.com/" + userinfo.getUser().getUsername();
             counpost++;
 
             boolean isvideo = userinfo.getUser().getMedia().getNodes().get(i).isIsVideo();
@@ -288,6 +290,7 @@ public Infoacc selectionPosts(Averagedata averagedata, Infoacc acc) {
             acc.setFullname(this.fullname);
             acc.setAccid(this.id);
             acc.setUsername(this.usernames);
+            acc.setUrls(this.urls);
             System.out.println(acc);
         } catch (ArithmeticException e) {
             e.printStackTrace();

@@ -34,8 +34,17 @@ public class Infoacc implements Serializable{
     @NotNull
     @Column(name = "imgs")
     private String img;
+    @NotNull
+    @Column(name = "urls")
+    private String urls;
 
+    public String getUrls() {
+        return urls;
+    }
 
+    public void setUrls(String urls) {
+        this.urls = urls;
+    }
 
     public Infoacc() {
     }

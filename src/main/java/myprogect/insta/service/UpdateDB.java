@@ -43,17 +43,17 @@ public class UpdateDB {
 //    String ot  = TIMESTAMP.format(new Date().getTime()-86400000);
 //    String po  = TIMESTAMP.format(new Date().getTime()-950400000);
 //    List<String> list = new ArrayList<>();
-//    list.add("polyakovamusic");
-//    list.add("citaty_men");
-//    list.add("iliyaprusikin");
-//    list.add("iqblog");
-//    list.add("mila_klimenko");
-//    list.add("insta_kuhnya");
-//    list.add("instagramru");
-//    list.add("womanmake");
-//    list.add("kyrykbayeva");
-//    list.add("english_in");
-//    list.add("azabraza1984");
+//    list.add("wonderful.globe");
+//    list.add("lizavetabo");
+//    list.add("world_thoughts");
+//    list.add("renatalitvinovaofficiall");
+//    list.add("vasiliysmolniy");
+//    list.add("nostalgy_vines");
+//    list.add("eshli_see");
+//    list.add("sardorahimxon");
+//    list.add("vogue_history");
+//    list.add("yalav");
+//    list.add("zloilarin");
 //
 //
 //    for (String acc: list) {

@@ -54,8 +54,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="/average">Средние данные</a></li>
                 <li><a href="/equalsAcc">Сравнить профили</a></li>
-                <li><a href="/followers">Подписчики/Подписки</a></li>
-                <li class="active"><a href="/statistic">Статистика аккаунтов</a></li>
+                <li><a href="/followers">Скачать подписчиков</a></li>
+                <li class="active"><a href="/statistic">Рейтинг аккаунтов</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Вход</a></li>
@@ -72,14 +72,14 @@
             <th></th>
             <th>Аккаунт</th>
             <th>Подписчиков</th>
-            <th>Лайков в ср.</th>
-            <th>Комментов в ср.</th>
-            <th>Просмотров в ср.</th>
+            <th title="Среднее кл-во лайков на постах за 5 дней">Лайков в ср.</th>
+            <th title="Среднее кл-во комментариев на постах за 5 дней">Комментов в ср.</th>
+            <th title="Среднее кл-во просмотров на видео за 5 дней">Просмотров в ср.</th>
         </tr>
         </thead>
         <tr th:each="infoAcc : ${infoAccs}">
             <td><img th:width="40" th:height="40" th:src="${infoAcc.getImg()}"/></td>
-            <td th:utext="${infoAcc.getFullname()}"/>
+            <td><a th:href="${infoAcc.getUrls()}" th:utext="${infoAcc.getFullname()}"/></td>
             <td th:utext="${infoAcc.getFollowers()}"/>
             <td th:utext="${infoAcc.getLike()}"/>
             <td th:utext="${infoAcc.getComment()}"/>
@@ -88,7 +88,7 @@
     </table>
 </div>
 
-
+<a href=""> </a>
 </body>
 
 <script>

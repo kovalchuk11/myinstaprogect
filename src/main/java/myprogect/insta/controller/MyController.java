@@ -1,8 +1,7 @@
 package myprogect.insta.controller;
 
-import myprogect.insta.entity.Infoacc;
 import myprogect.insta.service.InfoAccService;
-import myprogect.insta.service.Main;
+import myprogect.insta.service.Maina;
 import myprogect.insta.model.Averagedata;
 import myprogect.insta.model.TwoAcc;
 import myprogect.insta.service.UpdateDB;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
 
 @Controller
 @RequestMapping("/")
@@ -27,7 +24,7 @@ public class MyController {
     @Autowired
     UpdateDB updateDB;
     @Autowired
-    private Main main;
+    private Maina maina;
     @Autowired
     InfoAccService infoAccService;
     @RequestMapping
@@ -65,8 +62,8 @@ public class MyController {
             String ol = username1[username1.length - 1];
             String massage = null;
             try {
-                main.start();
-                massage = main.getFollowers(acc.getFirst());
+                maina.start();
+                massage = maina.getFollowers(acc.getFirst());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,7 +101,7 @@ public class MyController {
             System.out.println("true");
         System.out.println(averagedata);
         String massage = null;
-        massage = main.getAvarage(averagedata);
+        massage = maina.getAvarage(averagedata);
         model.addAttribute("massage", massage);
         }
 //        if((averagedata.getOt().equals("")&averagedata.getPo().equals(""))||(!averagedata.getOt().equals("")&!averagedata.getPo().equals(""))){
@@ -135,8 +132,8 @@ public class MyController {
         String massage = null;
         if(!(twoAcc.getFirst().equals("")||twoAcc.getSecond().equals(""))){
             try {
-                main.start();
-                massage = main.testFollowers(twoAcc.getFirst(), twoAcc.getSecond());
+                maina.start();
+                massage = maina.testFollowers(twoAcc.getFirst(), twoAcc.getSecond());
             } catch (Exception e) {
                 e.printStackTrace();
             }
