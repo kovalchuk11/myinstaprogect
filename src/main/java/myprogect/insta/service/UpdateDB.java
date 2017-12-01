@@ -36,6 +36,11 @@ public class UpdateDB {
                 acc = anonymus.selectionPosts(averagedata, acc);
                 infoAccService.update(acc);
             }
+            try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         }
     }
 //public void updateDb(){
@@ -43,17 +48,7 @@ public class UpdateDB {
 //    String ot  = TIMESTAMP.format(new Date().getTime()-86400000);
 //    String po  = TIMESTAMP.format(new Date().getTime()-950400000);
 //    List<String> list = new ArrayList<>();
-//    list.add("wonderful.globe");
-//    list.add("lizavetabo");
-//    list.add("world_thoughts");
-//    list.add("renatalitvinovaofficiall");
-//    list.add("vasiliysmolniy");
-//    list.add("nostalgy_vines");
-//    list.add("eshli_see");
-//    list.add("sardorahimxon");
-//    list.add("vogue_history");
-//    list.add("yalav");
-//    list.add("zloilarin");
+//    list.add("natellanatella");
 //
 //
 //    for (String acc: list) {
@@ -68,7 +63,7 @@ public class UpdateDB {
 //            infoAccService.save(infoacc);
 //        }
 //        try {
-//            Thread.sleep(10000);
+//            Thread.sleep(30000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }

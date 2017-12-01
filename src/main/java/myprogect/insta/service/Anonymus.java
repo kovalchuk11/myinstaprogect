@@ -220,71 +220,72 @@ public class Anonymus {
 
         return str;
     }
-//    -----------------------------------------
-public Infoacc selectionPosts(Averagedata averagedata, Infoacc acc) {
-    SimpleDateFormat format = new SimpleDateFormat();
-    format.applyPattern("dd.MM.yyyy");
-    long dateOt = 0;
-    long datePo = 0;
-    try {
-        dateOt = format.parse(averagedata.getOt()).getTime();
-        datePo = format.parse(averagedata.getPo()).getTime() - 86400000;
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-    String username = urlToUsername(averagedata.getUrl());
-    String jsonInfo = getJson(username, endCursor);
-    GsonBuilder builder = new GsonBuilder();
-    Gson gson = builder.create();
-    Jsona userinfo = gson.fromJson(jsonInfo, Jsona.class);
-    int countNode = userinfo.getUser().getMedia().getNodes().size();
-    long date = 0;
-    for (int i = 0; i < countNode; i++) {
-        date = userinfo.getUser().getMedia().getNodes().get(i).getDate() * 1000L - 86400000;
 
-        if ((dateOt >= date) & (date >= datePo)) {
-            like += userinfo.getUser().getMedia().getNodes().get(i).getLikes().getCount();
-            comments += userinfo.getUser().getMedia().getNodes().get(i).getComments().getCount();
-            fullname = userinfo.getUser().getFullName();
-            followers = userinfo.getUser().getFollowedBy().getCount();
-            img = userinfo.getUser().getProfilePicUrl();
-            id = Long.parseLong(userinfo.getUser().getId());
-            usernames = userinfo.getUser().getUsername();
-            urls = "https://www.instagram.com/" + userinfo.getUser().getUsername();
-            counpost++;
+    //    -----------------------------------------
+    public Infoacc selectionPosts(Averagedata averagedata, Infoacc acc) {
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("dd.MM.yyyy");
+        long dateOt = 0;
+        long datePo = 0;
+        try {
+            dateOt = format.parse(averagedata.getOt()).getTime();
+            datePo = format.parse(averagedata.getPo()).getTime() - 86400000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String username = urlToUsername(averagedata.getUrl());
+        String jsonInfo = getJson(username, endCursor);
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        Jsona userinfo = gson.fromJson(jsonInfo, Jsona.class);
+        int countNode = userinfo.getUser().getMedia().getNodes().size();
+        long date = 0;
+        for (int i = 0; i < countNode; i++) {
+            date = userinfo.getUser().getMedia().getNodes().get(i).getDate() * 1000L - 86400000;
 
-            boolean isvideo = userinfo.getUser().getMedia().getNodes().get(i).isIsVideo();
-            if (isvideo) {
-                codvideo = userinfo.getUser().getMedia().getNodes().get(i).getCode();
-                String jsonMedia = Anonymus.getJsonMedia(codvideo);
-                Jsona postinfo = gson.fromJson(jsonMedia, Jsona.class);
-                view += postinfo.getGraphql().getShortcodeMedia().getVideoViewCount();
-                countvideo++;
+            if ((dateOt >= date) & (date >= datePo)) {
+                like += userinfo.getUser().getMedia().getNodes().get(i).getLikes().getCount();
+                comments += userinfo.getUser().getMedia().getNodes().get(i).getComments().getCount();
+                fullname = userinfo.getUser().getFullName();
+                followers = userinfo.getUser().getFollowedBy().getCount();
+                img = userinfo.getUser().getProfilePicUrl();
+                id = Long.parseLong(userinfo.getUser().getId());
+                usernames = userinfo.getUser().getUsername();
+                urls = "https://www.instagram.com/" + userinfo.getUser().getUsername();
+                counpost++;
+
+                boolean isvideo = userinfo.getUser().getMedia().getNodes().get(i).isIsVideo();
+                if (isvideo) {
+                    codvideo = userinfo.getUser().getMedia().getNodes().get(i).getCode();
+                    String jsonMedia = Anonymus.getJsonMedia(codvideo);
+                    Jsona postinfo = gson.fromJson(jsonMedia, Jsona.class);
+                    view += postinfo.getGraphql().getShortcodeMedia().getVideoViewCount();
+                    countvideo++;
+                }
+                System.out.println(like + "|" + comments + "|" + isvideo + "|" + view);
+
             }
-            System.out.println(like + "|" + comments + "|" + isvideo + "|" + view);
 
         }
-
-    }
-    if (userinfo.getUser().getMedia().getPageInfo().isHasNextPage()) {
-        if (!(date < datePo)) {
-            endCursor = userinfo.getUser().getMedia().getPageInfo().getEndCursor();
-            selectionPosts(averagedata);
+        if (userinfo.getUser().getMedia().getPageInfo().isHasNextPage()) {
+            if (!(date < datePo)) {
+                endCursor = userinfo.getUser().getMedia().getPageInfo().getEndCursor();
+                selectionPosts(averagedata);
+            }
         }
-    }
 
-    return getAverage(acc);
-}
+        return getAverage(acc);
+    }
 
     public Infoacc getAverage(Infoacc acc) {
         try {
 //            acc.setId(2);
             if (!(this.counpost == 0))
-            acc.setLike(this.like / this.counpost);
+                acc.setLike(this.like / this.counpost);
             if (!(this.counpost == 0))
-            acc.setComment(this.comments / this.counpost);
+                acc.setComment(this.comments / this.counpost);
             if (!(this.countvideo == 0))
-            acc.setView(this.view / this.countvideo);
+                acc.setView(this.view / this.countvideo);
             acc.setFollowers(this.followers);
             acc.setImg(this.img);
             acc.setFullname(this.fullname);
@@ -309,6 +310,7 @@ public Infoacc selectionPosts(Averagedata averagedata, Infoacc acc) {
         }
         return encodedUrl;
     }
+
     public static String decodeStringUrl(String encodedUrl) {
         String decodedUrl = null;
         try {

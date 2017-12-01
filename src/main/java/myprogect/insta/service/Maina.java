@@ -46,14 +46,15 @@ public class Maina {
         else c = 17;
         System.out.println(c);
     }
-    public String urlToUsername(String url){
+
+    public String urlToUsername(String url) {
         String[] username1 = url.split("/");
         String username = username1[username1.length - 1];
         return username;
     }
 
     public String testFollowers(String first, String second) throws Exception {
-        if(first.equals("")||second.equals("")){
+        if (first.equals("") || second.equals("")) {
             return "заполните поля";
         }
 
@@ -64,8 +65,8 @@ public class Maina {
         int one;
         int two;
         try {
-        if (client.getAccountByUsername(username1).isPrivate || client.getAccountByUsername(username2).isPrivate)
-            return "Один из аккаунтов приватный";
+            if (client.getAccountByUsername(username1).isPrivate || client.getAccountByUsername(username2).isPrivate)
+                return "Один из аккаунтов приватный";
         } catch (InstagramNotFoundException t) {
             return null;
         }
@@ -103,8 +104,8 @@ public class Maina {
         String username1 = urlToUsername(first);
         int one;
         try {
-        if (client.getAccountByUsername(username1).isPrivate)
-            return "Это прватный аккаунт, невозможно спарсить подписчиков";
+            if (client.getAccountByUsername(username1).isPrivate)
+                return "Это прватный аккаунт, невозможно спарсить подписчиков";
             one = client.getAccountByUsername(username1).followedByCount;
         } catch (InstagramNotFoundException t) {
             return "Aккаунт не существует";
@@ -120,16 +121,14 @@ public class Maina {
             folowers.append(a.username + "\r\n");
         }
         followerss.clear();
-        System.out.print(folowers.toString());
         return folowers.toString();
     }
 
-    public String getAvarage(Averagedata averagedata){
+    public String getAvarage(Averagedata averagedata) {
         Anonymus anonymus = new Anonymus();
         String check = anonymus.checkUser(averagedata);
-        String message ="";
-        if(check.equals("Аккаунт открыт")){
-//            System.out.println(anonymus.selectionPosts(averagedata));
+        String message = "";
+        if (check.equals("Аккаунт открыт")) {
             message = anonymus.selectionPosts(averagedata);
         }
         return message;

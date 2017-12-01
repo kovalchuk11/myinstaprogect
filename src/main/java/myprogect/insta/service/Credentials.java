@@ -15,7 +15,7 @@ public class Credentials {
         Properties properties = new Properties();
         String lo = "login" + c;
         String pa = "password" + c;
-        try(FileInputStream is = new FileInputStream(PATH)) {
+        try (FileInputStream is = new FileInputStream(PATH)) {
 
             if (is == null) {
                 throw new IOException("can't find credentials file");

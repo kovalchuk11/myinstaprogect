@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "infoacc")
-public class Infoacc implements Serializable{
+public class Infoacc implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
